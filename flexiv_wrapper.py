@@ -1,3 +1,12 @@
+###################################################################################################
+# flexiv-controller for RDK Version 1.4.0
+# This script provides a wrapper class to control the Flexiv robotic arm.
+# Features include:
+#   - Initialization and connection to the Flexiv robot
+#   - Cartesian motion commands
+#   - Publishing robot states and end-effector poses by ROS1 noetic
+###################################################################################################
+
 import flexivrdk
 import rospy
 import numpy as np
@@ -15,7 +24,7 @@ from realrobot.utils.network import JointStatePublisher, FloatArrayPublisher
 from scipy.spatial.transform import Rotation as R
 
 
-class FlexivArm:
+class FlexivWrapper:
     """
     A wrapper class to control the Flexiv robotic arm.
     Provides methods to initialize the connection, control the arm, and publish its state.
@@ -175,8 +184,8 @@ class FlexivArm:
 # Example usage
 if __name__ == "__main__":
     rospy.init_node("flexiv_arm_controller")
-    controller = FlexivArm()
+    robot = FlexivWrapper()
 
     # Get the current TCP position in Euler angles
-    tcp = controller.get_tcp_position(euler=True)
+    tcp = robot.get_tcp_position(euler=True)
     print(tcp)
